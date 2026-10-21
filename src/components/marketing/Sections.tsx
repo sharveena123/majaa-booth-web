@@ -1,143 +1,69 @@
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Check, ChevronDown, MonitorPlay, LayoutDashboard, QrCode, Plug, SlidersHorizontal, Camera } from "lucide-react";
+import { Check, ChevronDown, Plug, SlidersHorizontal, Camera } from "lucide-react";
 import { useRef, useState } from "react";
-import { faqs, features, pricing } from "@/data/marketing";
+import { faqs, pricing } from "@/data/marketing";
 import { EASE, fadeUp, SectionHeading, SectionReveal, stagger, Logo } from "./primitives";
 import { scrollToId } from "./Navbar";
-
+import { FeatureBentoGrid } from "./FeatureBento";
 /* ---------- Features ---------- */
 export function FeatureSection() {
-  return (
-    <section id="features" className="relative scroll-mt-24 py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeading eyebrow="Features" title={<>Everything Your <span className="glow-text">Booth</span> Needs.</>}
-          sub="One platform to run unforgettable photo booth experiences and manage the business behind them." />
-        <motion.div variants={stagger(0.07)} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }}
-          className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(({ icon: I, title, desc }) => (
-            <motion.article key={title} variants={fadeUp}
-              className="glass group relative overflow-hidden p-6 transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-primary-glow/40 hover:shadow-glow-lg">
-              <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl opacity-60 transition-opacity group-hover:opacity-100" />
-              <motion.div variants={{ hidden: { scale: 0.6, opacity: 0 }, show: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: EASE, delay: 0.15 } } }}
-                className="relative grid h-11 w-11 place-items-center rounded-xl border border-border bg-primary/15">
-                <I className="h-5 w-5 text-primary-glow" />
-              </motion.div>
-              <h3 className="relative mt-5 font-semibold">{title}</h3>
-              <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-            </motion.article>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Showcase ---------- */
-const stages = [
-  { icon: MonitorPlay, title: "Run the Booth", desc: "The desktop app controls capture, layouts, camera, and printing.", rows: ["Camera · Canon R50 connected", "Layout · 2×6 strip", "Printer · DNP DS620 ready"] },
-  { icon: LayoutDashboard, title: "Manage Your Business", desc: "The web platform organizes machines, bookings, and revenue.", rows: ["8 machines online", "12 upcoming events", "RM12,480 this month"] },
-  { icon: QrCode, title: "Deliver the Memories", desc: "Guests scan QR codes and access their event galleries.", rows: ["Scan to download", "248 photos uploaded", "No account needed"] },
-];
-
-export function ProductShowcase() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
-  const line = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const dot = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  return (
-    <section id="showcase" className="relative scroll-mt-24 overflow-hidden py-28">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[140px]" />
-      <div className="relative mx-auto max-w-7xl px-6">
-        <SectionHeading eyebrow="The platform" title={<>One Platform. <span className="glow-text">Every Part</span> of the Experience.</>} />
-        <div ref={ref} className="relative mt-20">
-          {/* connector desktop */}
-          <div className="absolute left-[16%] right-[16%] top-7 hidden h-px bg-border lg:block">
-            <motion.div style={{ scaleX: line }} className="h-full origin-left bg-gradient-primary" />
-            <motion.div style={{ left: dot }} className="absolute -top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-highlight shadow-glow" />
-          </div>
-          <div className="grid gap-8 lg:grid-cols-3">
-            {stages.map(({ icon: I, title, desc, rows }, i) => (
-              <SectionReveal key={title} delay={i * 0.18} className="relative">
-                <div className="relative z-10 mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-primary shadow-glow">
-                  <I className="h-6 w-6" />
-                </div>
-                <div className="glass mt-8 p-6 text-center">
-                  <p className="label">Stage 0{i + 1}</p>
-                  <h3 className="mt-3 text-xl font-semibold">{title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
-                  <div className="mt-6 space-y-2 text-left">
-                    {rows.map((r) => (
-                      <div key={r} className="flex items-center gap-2 rounded-xl border border-border bg-background/50 px-3 py-2.5 text-sm">
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary-glow" /> {r}
-                      </div>
-                    ))}
-                  </div>
-                  {i === 2 && (
-                    <div className="mx-auto mt-5 grid h-24 w-24 grid-cols-5 gap-1 rounded-xl bg-foreground p-2">
-                      {Array.from({ length: 25 }).map((_, k) => (
-                        <span key={k} className={`rounded-[2px] ${[0,1,3,4,5,9,12,15,19,20,21,23,24,7,17].includes(k) ? "bg-deep" : ""}`} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <FeatureBentoGrid />;
 }
 
 /* ---------- How it works ---------- */
-const steps = [
-  { icon: Plug, title: "Connect Your Booth", desc: "Install Majaa, plug in your camera and printer, and activate your license." },
-  { icon: SlidersHorizontal, title: "Configure Your Experience", desc: "Pick modes, design layouts, and set AI styles for each event." },
-  { icon: Camera, title: "Capture and Share", desc: "Guests snap, print, and scan to take their memories home." },
-];
+export { HowItWorks } from "./PlatformShowcase";
 
-export function HowItWorks() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-120px" });
-  return (
-    <section id="how-it-works" className="scroll-mt-24 py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeading eyebrow="How it works" title={<>From Setup to <span className="glow-text">Showtime.</span></>} />
-        <div ref={ref} className="relative mt-20 grid gap-12 md:grid-cols-3 md:gap-8">
-          <div className="absolute left-7 top-0 h-full w-px bg-border md:left-[16%] md:right-[16%] md:top-7 md:h-px md:w-auto">
-            <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 1.6, ease: EASE }}
-              className="h-full w-full origin-top bg-gradient-primary md:origin-left" />
-          </div>
-          {steps.map(({ icon: I, title, desc }, i) => (
-            <motion.div key={title} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.4, duration: 0.7, ease: EASE }}
-              className="relative flex gap-6 md:flex-col md:items-center md:text-center">
-              <motion.div initial={{ boxShadow: "0 0 0 0 transparent" }} animate={inView ? { boxShadow: ["0 0 0 0 transparent", "var(--shadow-glow-lg)", "var(--shadow-glow)"] } : {}}
-                transition={{ delay: 0.3 + i * 0.4, duration: 1.2 }}
-                className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-primary-glow/40 bg-deep">
-                <I className="h-6 w-6 text-primary-glow" />
-              </motion.div>
-              <div>
-                <p className="label md:mt-6">Step {i + 1}</p>
-                <h3 className="mt-2 text-xl font-semibold">{title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+// /* ---------- How it works ---------- */
+// const steps = [
+//   { icon: Plug, title: "Connect Your Booth", desc: "Install Majaa, plug in your camera and printer, and activate your license." },
+//   { icon: SlidersHorizontal, title: "Configure Your Experience", desc: "Pick modes, design layouts, and set AI styles for each event." },
+//   { icon: Camera, title: "Capture and Share", desc: "Guests snap, print, and scan to take their memories home." },
+// ];
+
+// export function HowItWorks() {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const inView = useInView(ref, { once: true, margin: "-120px" });
+//   return (
+//     <section id="how-it-works" className="scroll-mt-24 py-28">
+//       <div className="mx-auto max-w-6xl px-6">
+//         <SectionHeading eyebrow="How it works" title={<>From Setup to <span className="glow-text">Showtime.</span></>} />
+//         <div ref={ref} className="relative mt-20 grid gap-12 md:grid-cols-3 md:gap-8">
+//           <div className="absolute left-7 top-0 h-full w-px bg-border md:left-[16%] md:right-[16%] md:top-7 md:h-px md:w-auto">
+//             <motion.div initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 1.6, ease: EASE }}
+//               className="h-full w-full origin-top bg-gradient-primary md:origin-left" />
+//           </div>
+//           {steps.map(({ icon: I, title, desc }, i) => (
+//             <motion.div key={title} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+//               transition={{ delay: 0.3 + i * 0.4, duration: 0.7, ease: EASE }}
+//               className="relative flex gap-6 md:flex-col md:items-center md:text-center">
+//               <motion.div initial={{ boxShadow: "0 0 0 0 transparent" }} animate={inView ? { boxShadow: ["0 0 0 0 transparent", "var(--shadow-glow-lg)", "var(--shadow-glow)"] } : {}}
+//                 transition={{ delay: 0.3 + i * 0.4, duration: 1.2 }}
+//                 className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-primary-glow/40 bg-deep">
+//                 <I className="h-6 w-6 text-primary-glow" />
+//               </motion.div>
+//               <div>
+//                 <p className="label md:mt-6">Step {i + 1}</p>
+//                 <h3 className="mt-2 text-xl font-semibold">{title}</h3>
+//                 <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
 /* ---------- Pricing ---------- */
 export function PricingSection() {
   return (
-    <section id="pricing" className="scroll-mt-24 py-28">
+    <section className="py-28">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHeading eyebrow="Pricing" title={<>A Plan That Fits Your <span className="glow-text">Booth Business.</span></>}
-          sub="Illustrative plans — final pricing coming soon." />
+        <div id="pricing">
+          <SectionHeading eyebrow="Pricing" title={<>A Plan That Fits Your <span className="glow-text">Booth Business.</span></>}
+            sub="Illustrative plans — final pricing coming soon." />
+        </div>
         <motion.div variants={stagger(0.12)} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-100px" }}
           className="mt-16 grid gap-6 md:grid-cols-3">
           {pricing.map((p) => (
@@ -165,9 +91,11 @@ export function PricingSection() {
 export function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="scroll-mt-24 py-28">
+    <section className="py-28">
       <div className="mx-auto max-w-3xl px-6">
-        <SectionHeading eyebrow="FAQ" title={<>Got <span className="glow-text">Questions?</span></>} />
+        <div id="faq">
+          <SectionHeading eyebrow="FAQ" title={<>Got <span className="glow-text">Questions?</span></>} />
+        </div>
         <SectionReveal className="mt-14 space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;

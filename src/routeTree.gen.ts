@@ -14,6 +14,22 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminLayoutRouteImport } from './routes/admin/_layout'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardLayoutRouteImport } from './routes/dashboard/_layout'
+import { Route as AdminDevicesIndexRouteImport } from './routes/admin/devices/index'
+import { Route as AdminDevicesIdRouteImport } from './routes/admin/devices/$id'
+import { Route as AdminDevicesLinkRouteImport } from './routes/admin/devices/link'
+import { Route as AdminOrganizationsIndexRouteImport } from './routes/admin/organizations/index'
+import { Route as AdminOrganizationsIdRouteImport } from './routes/admin/organizations/$id'
+import { Route as DashboardMachinesIndexRouteImport } from './routes/dashboard/machines/index'
+import { Route as DashboardMachinesIdRouteImport } from './routes/dashboard/machines/$id'
+import { Route as DashboardOrdersIndexRouteImport } from './routes/dashboard/orders/index'
+import { Route as DashboardOrdersIdRouteImport } from './routes/dashboard/orders/$id'
+import { Route as DashboardRevenueIndexRouteImport } from './routes/dashboard/revenue/index'
+import { Route as DashboardSettingsIndexRouteImport } from './routes/dashboard/settings/index'
+import { Route as AdminOrganizationsIdCloudRouteImport } from './routes/admin/organizations/$id.cloud'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +56,87 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLayoutRoute = AdminLayoutRouteImport.update({
+  id: '/admin/_layout',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardLayoutRoute = DashboardLayoutRouteImport.update({
+  id: '/dashboard/_layout',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDevicesIndexRoute = AdminDevicesIndexRouteImport.update({
+  id: '/admin/devices/',
+  path: '/admin/devices/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDevicesIdRoute = AdminDevicesIdRouteImport.update({
+  id: '/admin/devices/$id',
+  path: '/admin/devices/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDevicesLinkRoute = AdminDevicesLinkRouteImport.update({
+  id: '/admin/devices/link',
+  path: '/admin/devices/link',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrganizationsIndexRoute = AdminOrganizationsIndexRouteImport.update({
+  id: '/admin/organizations/',
+  path: '/admin/organizations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrganizationsIdRoute = AdminOrganizationsIdRouteImport.update({
+  id: '/admin/organizations/$id',
+  path: '/admin/organizations/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardMachinesIndexRoute = DashboardMachinesIndexRouteImport.update({
+  id: '/dashboard/machines/',
+  path: '/dashboard/machines/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardMachinesIdRoute = DashboardMachinesIdRouteImport.update({
+  id: '/dashboard/machines/$id',
+  path: '/dashboard/machines/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardOrdersIndexRoute = DashboardOrdersIndexRouteImport.update({
+  id: '/dashboard/orders/',
+  path: '/dashboard/orders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardOrdersIdRoute = DashboardOrdersIdRouteImport.update({
+  id: '/dashboard/orders/$id',
+  path: '/dashboard/orders/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRevenueIndexRoute = DashboardRevenueIndexRouteImport.update({
+  id: '/dashboard/revenue/',
+  path: '/dashboard/revenue/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSettingsIndexRoute = DashboardSettingsIndexRouteImport.update({
+  id: '/dashboard/settings/',
+  path: '/dashboard/settings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOrganizationsIdCloudRoute =
+  AdminOrganizationsIdCloudRouteImport.update({
+    id: '/cloud',
+    path: '/cloud',
+    getParentRoute: () => AdminOrganizationsIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +144,22 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AdminLayoutRoute
+  '/dashboard': typeof DashboardLayoutRoute
+  '/admin/': typeof AdminIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/admin/devices/$id': typeof AdminDevicesIdRoute
+  '/admin/devices/link': typeof AdminDevicesLinkRoute
+  '/admin/organizations/$id': typeof AdminOrganizationsIdRouteWithChildren
+  '/dashboard/machines/$id': typeof DashboardMachinesIdRoute
+  '/dashboard/orders/$id': typeof DashboardOrdersIdRoute
+  '/admin/devices/': typeof AdminDevicesIndexRoute
+  '/admin/organizations/': typeof AdminOrganizationsIndexRoute
+  '/dashboard/machines/': typeof DashboardMachinesIndexRoute
+  '/dashboard/orders/': typeof DashboardOrdersIndexRoute
+  '/dashboard/revenue/': typeof DashboardRevenueIndexRoute
+  '/dashboard/settings/': typeof DashboardSettingsIndexRoute
+  '/admin/organizations/$id/cloud': typeof AdminOrganizationsIdCloudRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +167,20 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/admin': typeof AdminIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/admin/devices/$id': typeof AdminDevicesIdRoute
+  '/admin/devices/link': typeof AdminDevicesLinkRoute
+  '/admin/organizations/$id': typeof AdminOrganizationsIdRouteWithChildren
+  '/dashboard/machines/$id': typeof DashboardMachinesIdRoute
+  '/dashboard/orders/$id': typeof DashboardOrdersIdRoute
+  '/admin/devices': typeof AdminDevicesIndexRoute
+  '/admin/organizations': typeof AdminOrganizationsIndexRoute
+  '/dashboard/machines': typeof DashboardMachinesIndexRoute
+  '/dashboard/orders': typeof DashboardOrdersIndexRoute
+  '/dashboard/revenue': typeof DashboardRevenueIndexRoute
+  '/dashboard/settings': typeof DashboardSettingsIndexRoute
+  '/admin/organizations/$id/cloud': typeof AdminOrganizationsIdCloudRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +189,91 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/admin/_layout': typeof AdminLayoutRoute
+  '/dashboard/_layout': typeof DashboardLayoutRoute
+  '/admin/': typeof AdminIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/admin/devices/$id': typeof AdminDevicesIdRoute
+  '/admin/devices/link': typeof AdminDevicesLinkRoute
+  '/admin/organizations/$id': typeof AdminOrganizationsIdRouteWithChildren
+  '/dashboard/machines/$id': typeof DashboardMachinesIdRoute
+  '/dashboard/orders/$id': typeof DashboardOrdersIdRoute
+  '/admin/devices/': typeof AdminDevicesIndexRoute
+  '/admin/organizations/': typeof AdminOrganizationsIndexRoute
+  '/dashboard/machines/': typeof DashboardMachinesIndexRoute
+  '/dashboard/orders/': typeof DashboardOrdersIndexRoute
+  '/dashboard/revenue/': typeof DashboardRevenueIndexRoute
+  '/dashboard/settings/': typeof DashboardSettingsIndexRoute
+  '/admin/organizations/$id/cloud': typeof AdminOrganizationsIdCloudRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/privacy' | '/signup' | '/terms'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
+    | '/admin'
+    | '/dashboard'
+    | '/admin/'
+    | '/dashboard/'
+    | '/admin/devices/$id'
+    | '/admin/devices/link'
+    | '/admin/organizations/$id'
+    | '/dashboard/machines/$id'
+    | '/dashboard/orders/$id'
+    | '/admin/devices/'
+    | '/admin/organizations/'
+    | '/dashboard/machines/'
+    | '/dashboard/orders/'
+    | '/dashboard/revenue/'
+    | '/dashboard/settings/'
+    | '/admin/organizations/$id/cloud'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/privacy' | '/signup' | '/terms'
-  id: '__root__' | '/' | '/login' | '/privacy' | '/signup' | '/terms'
+  to:
+    | '/'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
+    | '/admin'
+    | '/dashboard'
+    | '/admin/devices/$id'
+    | '/admin/devices/link'
+    | '/admin/organizations/$id'
+    | '/dashboard/machines/$id'
+    | '/dashboard/orders/$id'
+    | '/admin/devices'
+    | '/admin/organizations'
+    | '/dashboard/machines'
+    | '/dashboard/orders'
+    | '/dashboard/revenue'
+    | '/dashboard/settings'
+    | '/admin/organizations/$id/cloud'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
+    | '/admin/_layout'
+    | '/dashboard/_layout'
+    | '/admin/'
+    | '/dashboard/'
+    | '/admin/devices/$id'
+    | '/admin/devices/link'
+    | '/admin/organizations/$id'
+    | '/dashboard/machines/$id'
+    | '/dashboard/orders/$id'
+    | '/admin/devices/'
+    | '/admin/organizations/'
+    | '/dashboard/machines/'
+    | '/dashboard/orders/'
+    | '/dashboard/revenue/'
+    | '/dashboard/settings/'
+    | '/admin/organizations/$id/cloud'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +282,21 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
+  AdminLayoutRoute: typeof AdminLayoutRoute
+  DashboardLayoutRoute: typeof DashboardLayoutRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  AdminDevicesIdRoute: typeof AdminDevicesIdRoute
+  AdminDevicesLinkRoute: typeof AdminDevicesLinkRoute
+  AdminOrganizationsIdRoute: typeof AdminOrganizationsIdRouteWithChildren
+  DashboardMachinesIdRoute: typeof DashboardMachinesIdRoute
+  DashboardOrdersIdRoute: typeof DashboardOrdersIdRoute
+  AdminDevicesIndexRoute: typeof AdminDevicesIndexRoute
+  AdminOrganizationsIndexRoute: typeof AdminOrganizationsIndexRoute
+  DashboardMachinesIndexRoute: typeof DashboardMachinesIndexRoute
+  DashboardOrdersIndexRoute: typeof DashboardOrdersIndexRoute
+  DashboardRevenueIndexRoute: typeof DashboardRevenueIndexRoute
+  DashboardSettingsIndexRoute: typeof DashboardSettingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,8 +336,131 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/_layout': {
+      id: '/admin/_layout'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/_layout': {
+      id: '/dashboard/_layout'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/devices/': {
+      id: '/admin/devices/'
+      path: '/admin/devices'
+      fullPath: '/admin/devices/'
+      preLoaderRoute: typeof AdminDevicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/devices/$id': {
+      id: '/admin/devices/$id'
+      path: '/admin/devices/$id'
+      fullPath: '/admin/devices/$id'
+      preLoaderRoute: typeof AdminDevicesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/devices/link': {
+      id: '/admin/devices/link'
+      path: '/admin/devices/link'
+      fullPath: '/admin/devices/link'
+      preLoaderRoute: typeof AdminDevicesLinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/organizations/': {
+      id: '/admin/organizations/'
+      path: '/admin/organizations'
+      fullPath: '/admin/organizations/'
+      preLoaderRoute: typeof AdminOrganizationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/organizations/$id': {
+      id: '/admin/organizations/$id'
+      path: '/admin/organizations/$id'
+      fullPath: '/admin/organizations/$id'
+      preLoaderRoute: typeof AdminOrganizationsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/machines/': {
+      id: '/dashboard/machines/'
+      path: '/dashboard/machines'
+      fullPath: '/dashboard/machines/'
+      preLoaderRoute: typeof DashboardMachinesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/machines/$id': {
+      id: '/dashboard/machines/$id'
+      path: '/dashboard/machines/$id'
+      fullPath: '/dashboard/machines/$id'
+      preLoaderRoute: typeof DashboardMachinesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/orders/': {
+      id: '/dashboard/orders/'
+      path: '/dashboard/orders'
+      fullPath: '/dashboard/orders/'
+      preLoaderRoute: typeof DashboardOrdersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/orders/$id': {
+      id: '/dashboard/orders/$id'
+      path: '/dashboard/orders/$id'
+      fullPath: '/dashboard/orders/$id'
+      preLoaderRoute: typeof DashboardOrdersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/revenue/': {
+      id: '/dashboard/revenue/'
+      path: '/dashboard/revenue'
+      fullPath: '/dashboard/revenue/'
+      preLoaderRoute: typeof DashboardRevenueIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/settings/': {
+      id: '/dashboard/settings/'
+      path: '/dashboard/settings'
+      fullPath: '/dashboard/settings/'
+      preLoaderRoute: typeof DashboardSettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/organizations/$id/cloud': {
+      id: '/admin/organizations/$id/cloud'
+      path: '/cloud'
+      fullPath: '/admin/organizations/$id/cloud'
+      preLoaderRoute: typeof AdminOrganizationsIdCloudRouteImport
+      parentRoute: typeof AdminOrganizationsIdRoute
+    }
   }
 }
+
+interface AdminOrganizationsIdRouteChildren {
+  AdminOrganizationsIdCloudRoute: typeof AdminOrganizationsIdCloudRoute
+}
+
+const AdminOrganizationsIdRouteChildren: AdminOrganizationsIdRouteChildren = {
+  AdminOrganizationsIdCloudRoute: AdminOrganizationsIdCloudRoute,
+}
+
+const AdminOrganizationsIdRouteWithChildren =
+  AdminOrganizationsIdRoute._addFileChildren(AdminOrganizationsIdRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -125,6 +468,21 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
+  AdminLayoutRoute: AdminLayoutRoute,
+  DashboardLayoutRoute: DashboardLayoutRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  AdminDevicesIdRoute: AdminDevicesIdRoute,
+  AdminDevicesLinkRoute: AdminDevicesLinkRoute,
+  AdminOrganizationsIdRoute: AdminOrganizationsIdRouteWithChildren,
+  DashboardMachinesIdRoute: DashboardMachinesIdRoute,
+  DashboardOrdersIdRoute: DashboardOrdersIdRoute,
+  AdminDevicesIndexRoute: AdminDevicesIndexRoute,
+  AdminOrganizationsIndexRoute: AdminOrganizationsIndexRoute,
+  DashboardMachinesIndexRoute: DashboardMachinesIndexRoute,
+  DashboardOrdersIndexRoute: DashboardOrdersIndexRoute,
+  DashboardRevenueIndexRoute: DashboardRevenueIndexRoute,
+  DashboardSettingsIndexRoute: DashboardSettingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,5 +1,5 @@
 import {
-  Camera, Video, Layers, Sparkles, LayoutTemplate, QrCode, MonitorSmartphone, Printer,
+  Camera, Layers, Sparkles, LayoutTemplate, QrCode, MonitorSmartphone, Printer,
   type LucideIcon,
 } from "lucide-react";
 
@@ -12,7 +12,6 @@ export const navLinks = [
 
 export const features: { icon: LucideIcon; title: string; desc: string }[] = [
   { icon: Camera, title: "Photo Booth", desc: "Canon and webcam capture with professional, studio-grade printing." },
-  { icon: Video, title: "Video Guestbook", desc: "Capture heartfelt event messages guests will treasure." },
   { icon: Layers, title: "Lenticular", desc: "Specialized lenticular photo workflows, built in." },
   { icon: Sparkles, title: "AI Photobooth", desc: "AI-generated scenes and creative portraits in seconds." },
   { icon: LayoutTemplate, title: "Layout Designer", desc: "Custom photo strips with precise print alignment." },

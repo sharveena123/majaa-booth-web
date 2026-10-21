@@ -1,17 +1,43 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { navLinks } from "@/data/marketing";
 import { Logo } from "./primitives";
 
+/** Space between bottom of fixed header and section eyebrow after nav jump */
+const LANDING_HEADER_GAP_PX = 24;
+
+function landingHeaderScrollOffset() {
+  const header = document.querySelector("header.fixed");
+  if (!header) return 88;
+  return header.getBoundingClientRect().bottom + LANDING_HEADER_GAP_PX;
+}
+
 export function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const el = document.getElementById(id);
+  if (!el) return;
+  const offset = landingHeaderScrollOffset();
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
+export function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 export function Navbar() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const onLogoClick = (e: MouseEvent) => {
+    setOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 24);
     on();
@@ -26,7 +52,9 @@ export function Navbar() {
           scrolled || open ? "border-border bg-background/70 shadow-glow backdrop-blur-xl" : "border-transparent bg-transparent"
         }`}
       >
-        <Link to="/" aria-label="Majaa home"><Logo /></Link>
+        <Link to="/" aria-label="Majaa home" onClick={onLogoClick}>
+          <Logo />
+        </Link>
         <ul className="hidden items-center gap-8 md:flex">
           {navLinks.map((l) => (
             <li key={l.id}>
